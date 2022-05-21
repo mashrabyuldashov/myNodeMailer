@@ -9,10 +9,10 @@ app.use(cors())
 
 const PORT = process.env.PORT || 9000
 
-app.get('/', async(req, res) => {
-    await mail(req.body.email, req.body.password, req.body.subject, req.body.text)
+app.post('/', (req, res) => {
+    mail(req.body.email, req.body.password, req.body.subject, req.body.text)
     console.log(req.body)
-    res.end("Baxtiyor")
+    res.send("Baxtiyor")
 })
 
 app.listen(PORT, console.log(PORT))
