@@ -1,10 +1,15 @@
-const http = require('http')
-const nodemailer = require('nodemailer')
+const express = require('express')
+const app = express()
+
 const mail = require('./utils/mail')
 
-const server = http.createServer(async(req, res) => {
-    await mail('tohirjondoniyorov@gmail.com')
+app.use(express.json())
+
+const PORT = process.env.PORT || 9000
+
+app.get('/', async(req, res) => {
+    await mail(req.body.email, req.body.password, req.body.subject, req.body.text)
     res.end("Baxtiyor")
 })
 
-server.listen(9000, console.log(9000))
+app.listen(PORT, console.log(PORT))
